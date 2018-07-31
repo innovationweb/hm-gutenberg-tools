@@ -17,7 +17,8 @@
     "sass:build:dev": "node-sass-chokidar --source-map true --output-style expanded css/ -o ./build/",
     "sass:watch": "yarn sass:build:dev; chokidar \"./css/**/*.scss\" -c \"yarn sass:build:dev\"",
     "clean:build": "del-cli ./build/*",
-    "test": "jest --coverage --coverageDirectory=coverage"
+    "test": "jest --coverage --coverageDirectory=coverage",
+    "prepush": "concurrently -p name -n \"Lint\" -c \"cyan.bold\" \"yarn lint\""
   },
   "jest": {
     "setupTestFrameworkScriptFile": "./js/setupTests.js"
@@ -53,6 +54,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^6.10.3",
     "html-to-react": "^1.3.2",
+    "husky": "^0.14.3",
     "immutability-helper": "^2.6.4",
     "jest": "^22.2.2",
     "jsdom": "^11.6.2",
