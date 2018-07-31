@@ -24,7 +24,7 @@ const PostListItem = ( { post, onClick, isSelected, onSelectItem, actions } ) =>
 			className={ classNames( 'post-list-item', { 'post-list-item--selected': isSelected } ) }
 			onClick={ () => onSelectItem() }
 		>
-			<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered }} />
+			<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered } } />
 			<div className="post-list-item--meta">
 				{ meta.map( ( metaItem, i ) => <Fragment key={ i }>{ metaItem } </Fragment> ) }
 			</div>
@@ -34,10 +34,10 @@ const PostListItem = ( { post, onClick, isSelected, onSelectItem, actions } ) =>
 }
 
 PostListItem.propTypes = {
-	post:         PropTypes.object.isRequired,
-	onClick:      PropTypes.func.isRequired,
-	isSelected:   PropTypes.bool,
-	actions:      PropTypes.array,
+	post: PropTypes.object.isRequired,
+	onClick: PropTypes.func.isRequired,
+	isSelected: PropTypes.bool,
+	actions: PropTypes.array,
 	onSelectItem: PropTypes.func,
 }
 

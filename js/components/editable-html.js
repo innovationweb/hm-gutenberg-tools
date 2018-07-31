@@ -31,7 +31,7 @@ class EditableHTML extends React.Component {
 	render() {
 		const props = {
 			...this.props,
-			value:    this.state.text,
+			value: this.state.text,
 			onChange: text => this.setState( { text } ),
 		}
 

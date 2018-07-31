@@ -25,7 +25,7 @@ class PostSelectModal extends React.Component {
 		minPosts: PropTypes.number,
 		maxPosts: PropTypes.number,
 		onSelect: PropTypes.func.isRequired,
-		onClose:  PropTypes.func.isRequired,
+		onClose: PropTypes.func.isRequired,
 	};
 
 	constructor( props ) {
@@ -40,7 +40,10 @@ class PostSelectModal extends React.Component {
 
 			selectedPosts.fetch( {
 				hmCache: 120,
-				data:    { per_page: props.value.length, include: props.value },
+				data: {
+					per_page: props.value.length,
+					include: props.value,
+				},
 			} ).then( () => {
 				this.mounted && this.forceUpdate()
 			} );
@@ -70,7 +73,7 @@ class PostSelectModal extends React.Component {
 			termFilters = getPostTypeTaxFilters( this.props.postType ),
 		} = this.props;
 
-		return <div className="post-select post-select-modal">
+		return ( <div className="post-select post-select-modal">
 			<div className="media-modal-backdrop"></div>
 			<div
 				className="modal media-modal wp-core-ui"
@@ -106,24 +109,24 @@ class PostSelectModal extends React.Component {
 				<div className="media-frame-toolbar">
 					<div className="media-toolbar">
 						<Button
-							isPrimary={true}
+							isPrimary={ true }
 							isLarge
 							onClick={ () => onSelect( this.state.selectedPosts.toJSON() ) }
 						>Select</Button>
 						{ ( this.state.contentState !== 'selection' ) && <Button
-							isPrimary={false}
+							isPrimary={ false }
 							isLarge
 							onClick={ () => this.setState( { contentState: 'selection' } ) }
 						>View / Edit Selected Posts</Button> }
 						{ ( this.state.contentState !== 'browse' ) && <Button
-							isPrimary={false}
+							isPrimary={ false }
 							isLarge
 							onClick={ () => this.setState( { contentState: 'browse' } ) }
 						>Browse posts</Button> }
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> )
 	}
 
 	togglePostSelected( post ) {

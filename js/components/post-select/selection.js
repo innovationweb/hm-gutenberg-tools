@@ -4,7 +4,6 @@ import _uniqueId from 'lodash/uniqueId';
 
 import PostListItem from './post-list-item';
 
-
 const PostSelectSelection = ( { selectedPosts, onRemoveItem, onMoveItemUp, onMoveItemDown } ) => (
 	<React.Fragment>
 		{ ! selectedPosts.length && <p>Nothing selected</p> }
@@ -39,9 +38,9 @@ const PostSelectSelection = ( { selectedPosts, onRemoveItem, onMoveItemUp, onMov
 );
 
 PostSelectSelection.propTypes = {
-	selectedPosts:  PropTypes.array.isRequired,
-	onRemoveItem:   PropTypes.func.isRequired,
-	onMoveItemUp:   PropTypes.func.isRequired,
+	selectedPosts: PropTypes.array.isRequired,
+	onRemoveItem: PropTypes.func.isRequired,
+	onMoveItemUp: PropTypes.func.isRequired,
 	onMoveItemDown: PropTypes.func.isRequired,
 };
 

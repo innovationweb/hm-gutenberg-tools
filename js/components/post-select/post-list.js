@@ -18,8 +18,8 @@ const PostList = ( { posts, selectedPosts, onToggleSelectedPost } ) => (
 )
 
 PostList.propTypes = {
-	posts:                 PropTypes.arrayOf( PropTypes.object ),
-	selectedPosts:         PropTypes.arrayOf( PropTypes.object ),
+	posts: PropTypes.arrayOf( PropTypes.object ),
+	selectedPosts: PropTypes.arrayOf( PropTypes.object ),
 	onToggleSelectedPosts: PropTypes.func.isRequired,
 };
 

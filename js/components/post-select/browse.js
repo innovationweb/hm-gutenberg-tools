@@ -15,9 +15,9 @@ const { Spinner } = wp.components;
 
 class PostSelectBrowse extends React.Component {
 	state = {
-		posts:     [],
+		posts: [],
 		isLoading: false,
-		filters:   {},
+		filters: {},
 	};
 
 	componentWillMount() {
@@ -39,7 +39,7 @@ class PostSelectBrowse extends React.Component {
 		const { posts, isLoading } = this.state;
 		const { selectedPosts, togglePostSelected, termFilters } = this.props;
 
-		return <div className="menu-container">
+		return ( <div className="menu-container">
 			<div className="menu">
 				<PostSelectBrowseFilters
 					termFilters={ termFilters }
@@ -65,12 +65,12 @@ class PostSelectBrowse extends React.Component {
 					isLarge
 				>Next page</Button> }
 			</div>
-		</div>
+		</div> )
 	}
 
 	postCollectionFetchData() {
 		const args = {
-			page:     1,
+			page: 1,
 			per_page: 25,
 		};
 
@@ -104,11 +104,17 @@ class PostSelectBrowse extends React.Component {
 		this.postsCollection.on( 'request', () => this.setState( { isLoading: true } ) );
 		this.postsCollection.on( 'sync', () => this.setState( { isLoading: false } ) );
 
-		this.postsCollection.fetch( { hmCache: 30, data: this.postCollectionFetchData() } );
+		this.postsCollection.fetch( {
+			hmCache: 30,
+			data: this.postCollectionFetchData(),
+		} );
 	}
 
 	fetchPostsCollection() {
-		this.postsCollection.fetch( { hmCache: 30, data: this.postCollectionFetchData() } );
+		this.postsCollection.fetch( {
+			hmCache: 30,
+			data: this.postCollectionFetchData(),
+		} );
 	}
 
 	nextPostsPage( options = {} ) {
@@ -161,13 +167,13 @@ class PostSelectBrowse extends React.Component {
 }
 
 PostSelectBrowse.propTypes = {
-	postType:           PropTypes.string,
-	selectedPosts:      PropTypes.array,
+	postType: PropTypes.string,
+	selectedPosts: PropTypes.array,
 	togglePostSelected: PropTypes.func.isRequired,
-	termFilters:        PropTypes.arrayOf( PropTypes.shape( {
-		slug:  PropTypes.string.isRequired,
+	termFilters: PropTypes.arrayOf( PropTypes.shape( {
+		slug: PropTypes.string.isRequired,
 		label: PropTypes.string.isRequired,
-		rest:  PropTypes.string.isRequired,
+		rest: PropTypes.string.isRequired,
 	} ) ).isRequired,
 }
 export default PostSelectBrowse;
