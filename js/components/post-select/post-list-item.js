@@ -1,13 +1,11 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import wp from 'wp';
 import moment from 'moment';
 import classNames from 'classnames';
 import getPostTypeLabel from '../../utils/get-post-type-label';
 import PostListItemAuthor from './post-list-item-author';
 import PostListItemActions from './post-list-item-actions';
-
-const { Button } = wp.components;
+import wp from 'wp'; // eslint-disable-line no-unused-vars
 
 const PostListItem = ( { post, onClick, isSelected, onSelectItem, actions } ) => {
 	const meta =[
@@ -26,7 +24,9 @@ const PostListItem = ( { post, onClick, isSelected, onSelectItem, actions } ) =>
 		>
 			<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered } } />
 			<div className="post-list-item--meta">
-				{ meta.map( ( metaItem, i ) => <Fragment key={ i }>{ metaItem } </Fragment> ) }
+				{ meta.map( ( metaItem, i ) => (
+					<Fragment key={ i }>{ metaItem } </Fragment> )
+				) }
 			</div>
 			<PostListItemActions actions={ actions }/>
 		</li>
@@ -42,7 +42,6 @@ PostListItem.propTypes = {
 }
 
 PostListItem.defaultProps = {
-	actions: [],
 	actions: [],
 	onSelectItem: () => {},
 }

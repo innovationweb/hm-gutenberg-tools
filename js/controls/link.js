@@ -2,14 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import wp from 'wp';
 
-const {
-	InspectorControls,
-	UrlInput,
-} = wp.editor;
-
-const {
-	BaseControl,
-} = wp.components;
+const { UrlInput } = wp.editor;
+const { BaseControl } = wp.components;
 
 /**
  * InspectorControl for image upload.

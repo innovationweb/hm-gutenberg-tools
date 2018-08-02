@@ -4,6 +4,7 @@ import wp from 'wp';
 import Select from 'react-select';
 import _uniqueId from 'lodash/uniqueId';
 import _get from 'lodash/get';
+import getTaxonomyCollection from '../../utils/get-taxonomy-collection';
 
 const { Button } = wp.components;
 const { __ } = wp.i18n;
@@ -84,7 +85,7 @@ class PostBrowseFilters extends React.Component {
 	}
 
 	getTerms( taxSlug, query, callback ) {
-		const Collection = hm.utils.api.getTaxonomyCollection( taxSlug );
+		const Collection = getTaxonomyCollection( taxSlug );
 		const taxCollection = new Collection();
 
 		const fetchData = {

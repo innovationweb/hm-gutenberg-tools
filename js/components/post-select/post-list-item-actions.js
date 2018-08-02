@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wp from 'wp';
-import getPostTypeLabel from '../../utils/get-post-type-label';
 
 const {
 	Button,

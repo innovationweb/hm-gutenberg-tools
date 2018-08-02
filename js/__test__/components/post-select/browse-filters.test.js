@@ -1,13 +1,34 @@
 /**
  * @jest-environment node
  */
-jest.mock( 'wp' );
 
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import wp from 'wp'; // eslint-disable-line no-unused-vars
 import Select from 'react-select';
 import PostBrowseFilters from '../../../components/post-select/browse-filters';
+
+jest.mock( 'wp' );
+jest.mock( '../../../utils/get-taxonomy-collection', () => {
+	class MockCollection {
+		fetch() {
+			return new Promise( ( resolve, reject ) => {
+				process.nextTick( () => resolve( [
+					{
+						id: 1,
+						name: 'sport',
+					},
+				] ) );
+			} );
+		}
+
+		hasMore() {
+			return true;
+		}
+	}
+
+	return () => MockCollection;
+} );
 
 test( 'Browse Filters ', () => {
 	const props = {

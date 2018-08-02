@@ -1,7 +1,6 @@
+import wp from 'wp'; // eslint-disable-line no-unused-vars
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import wp from 'wp' // eslint-disable-line no-unused-vars
 import PostListItem from './post-list-item';
 
 const PostList = ( { posts, selectedPosts, onToggleSelectedPost } ) => (
@@ -11,7 +10,7 @@ const PostList = ( { posts, selectedPosts, onToggleSelectedPost } ) => (
 				key={ post.id }
 				post={ post }
 				onSelectItem={ () => onToggleSelectedPost( post ) }
-				isSelected={ selectedPosts.length && selectedPosts.find( p => p.id === post.id ) }
+				isSelected={ selectedPosts.length && !! selectedPosts.find( p => p.id === post.id ) }
 			/>
 		) ) }
 	</ol>

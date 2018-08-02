@@ -1,12 +1,14 @@
 /**
  * @jest-environment node
  */
-jest.mock( 'wp' );
-
 import React from 'react';
 import { shallow } from 'enzyme';
 import wp from 'wp'; // eslint-disable-line no-unused-vars
 import PostList from '../../../components/post-select/post-list';
+import PostListItem from '../../../components/post-select/post-list-item';
+
+jest.mock( 'wp' );
+jest.mock( '../../../components/post-select/post-list-item', () => () => <div className="post-list-item" /> );
 
 test( 'Post List with defaults', () => {
 	const postList = shallow( <PostList onToggleSelectedPosts={ () => {} }  /> );
@@ -38,8 +40,9 @@ test( 'Post List with posts ', () => {
 		onToggleSelectedPosts={ () => {} }
 	/> );
 
-	expect( postList.find( '.post-list-item' ).length ).toBe( 2 );
-	expect( postList.find( '.focused' ).length ).toBe( 1 );
+	expect( postList.find( PostListItem ).length ).toBe( 2 );
+	expect( postList.find( PostListItem ).at( 0 ).props().isSelected ).toBe( false );
+	expect( postList.find( PostListItem ).at( 1 ).props().isSelected ).toBe( true );
 } );
 
 test( 'Post List select post', () => {
@@ -69,7 +72,11 @@ test( 'Post List select post', () => {
 		onToggleSelectedPosts={ onToggleSelectedPosts }
 	/> );
 
-	postList.find( '.post-list-item' ).at( 1 ).simulate( 'click' );
+
+	postList.find( PostListItem ).at( 0 ).onSelectItem();
+
+	console.log( func );
+	func();
 	expect( onToggleSelectedPosts.mock.calls.length ).toBe( 1 );
-	expect( onToggleSelectedPosts.mock.calls[0][0] ).toEqual( posts[1] );
+	expect( onToggleSelectedPosts.mock.calls[0][0] ).toEqual( posts[0] );
 } );

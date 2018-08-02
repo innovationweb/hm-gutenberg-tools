@@ -6,7 +6,7 @@
     "build": "yarn clean:build && concurrently -p name -n \"JS,CSS\" -c \"cyan.bold,yellow.bold\" \"yarn js:build\" \"yarn css:build\"",
     "watch": "concurrently -p name -n \"JS,CSS\" -c \"cyan.bold,yellow.bold\" \"yarn js:watch\" \"yarn sass:watch\"",
     "dev": "yarn watch",
-    "lint": "yarn lint:js && yarn lint:php",
+    "lint": "concurrently -p name -n \"Lint:JS,Lint:PHP\" -c \"cyan.bold,yellow.bold\" \"yarn lint:js\" \"yarn lint:php\"",
     "lint:js": "eslint ./js --fix",
     "lint:php": "./vendor/bin/phpcs . --standard=./phpcs.ruleset.xml -s",
     "js:build": "cross-env NODE_ENV=production webpack",
@@ -18,7 +18,8 @@
     "sass:watch": "yarn sass:build:dev; chokidar \"./css/**/*.scss\" -c \"yarn sass:build:dev\"",
     "clean:build": "del-cli ./build/*",
     "test": "jest --coverage --coverageDirectory=coverage",
-    "prepush": "concurrently -p name -n \"Lint\" -c \"cyan.bold\" \"yarn lint\""
+    "test:watch": "jest --watch",
+    "precommit": "concurrently -p name -n \"Lint,Test\" -c \"cyan.bold,yellow.bold\" \"yarn lint\" \"yarn test\""
   },
   "jest": {
     "setupTestFrameworkScriptFile": "./js/setupTests.js"
@@ -58,6 +59,7 @@
     "immutability-helper": "^2.6.4",
     "jest": "^22.2.2",
     "jsdom": "^11.6.2",
+    "moment": "^2.22.2",
     "node-sass": "^4.7.2",
     "node-sass-chokidar": "0.0.3",
     "postcss-clean": "^1.1.0",
