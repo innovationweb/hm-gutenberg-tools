@@ -99,6 +99,11 @@
 
 	&--meta {
 		color: #666;
+
+		> span {
+			display: inline-block;
+			margin-right: 10px;
+		}
 	}
 
 	.components-spinner {

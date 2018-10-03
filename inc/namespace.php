@@ -7,6 +7,7 @@ namespace HM\GutenbergTools;
  */
 function setup() {
 	add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\\enqueue_block_editor_assets' );
+	add_action( 'rest_api_init', __NAMESPACE__ . '\\setup_rest_api_endpoint' );
 }
 
 /**
@@ -29,58 +30,11 @@ function enqueue_block_editor_assets() {
 	);
 
 	wp_localize_script( 'hm-gb-tools-editor', 'hmGbToolsData', [
-		'postTypes'          => get_post_types(),
-		'postTypeTaxonomies' => get_post_type_taxonomies(),
+		'endpoint' => 'hm-gb-tools/v1/multi-post-type',
 	] );
 }
 
-/**
- * Get post type data.
- *
- * @return array
- */
-function get_post_types() {
-	$post_types = \get_post_types(
-		[
-			'show_in_rest' => true,
-		],
-		'objects'
-	);
-
-	$data = [];
-
-	foreach ( $post_types as $post_type_object ) {
-		$data[ $post_type_object->name ] = [
-			'name'          => $post_type_object->labels->name,
-			'singular_name' => $post_type_object->labels->singular_name,
-			'rest_base'     => $post_type_object->rest_base,
-		];
-	}
-
-	return apply_filters( 'hm_gb_tools_post_type_labels', $data );
-}
-
-/**
- * Get taxonomies for each public post type.
- *
- * Used by the post select UI display filters.
- *
- * @return array.
- */
-function get_post_type_taxonomies() {
-	$post_types = \get_post_types();
-
-	$data = array_combine( $post_types, array_map( function( $post_type ) {
-		return array_values( array_filter( array_map( function( $tax ) {
-			if ( isset( $tax->show_in_rest ) && $tax->show_in_rest ) {
-				return [
-					'slug'     => $tax->name,
-					'label'    => $tax->label,
-					'restBase' => ! empty( $tax->rest_base ) ? $tax->rest_base : $tax->name,
-				];
-			}
-		}, get_object_taxonomies( $post_type, 'object' ) ) ) );
-	}, $post_types ) );
-
-	return apply_filters( 'hm_gb_tools_post_type_taxonomies', $data );
+function setup_rest_api_endpoint() {
+	$controller = new Multi_Post_Type_Endpoint_Controller();
+	$controller->register_routes();
 }

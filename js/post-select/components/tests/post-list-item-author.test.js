@@ -1,7 +1,7 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
 
-import PostListItemAuthor from './post-list-item-author';
+import PostListItemAuthor from '../post-list-item-author';
 
 const author = {
 	name: 'Matt Mullenweg',

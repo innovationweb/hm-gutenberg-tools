@@ -2,7 +2,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
-import FormFieldSelect from './form-field-select';
+import FormFieldSelect from '../form-field-select';
 
 const options = [
 	{

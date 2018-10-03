@@ -26,7 +26,7 @@ const PostControl = ( {
 	return (
 		<BaseControl label={ label } id={ id } help={ help } className="hm-post-control">
 			<PostSelectButton
-				{ ...postSelectProps }
+				postSelectProps={ postSelectProps }
 				value={ value }
 				onSelect={ posts => onChange( posts ) }
 			>{ btnText }</PostSelectButton>

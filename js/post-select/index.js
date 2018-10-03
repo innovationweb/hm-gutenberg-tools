@@ -14,6 +14,7 @@ class PostSelectButton extends React.Component {
 		const {
 			children,
 			onSelect,
+			value,
 		} = this.props;
 
 		const { modalVisible } = this.state;
@@ -30,7 +31,8 @@ class PostSelectButton extends React.Component {
 			{ modalVisible && (
 				ReactDOM.createPortal(
 					<PostSelectModal
-						{ ...this.props }
+						value={ value }
+						{ ...this.props.postSelectProps }
 						onSelect={ posts => {
 							onSelect( posts );
 							onClose();
