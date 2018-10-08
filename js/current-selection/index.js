@@ -1,26 +1,25 @@
 import wp from 'wp';
 
 import CurrentSelection from './components/current-selection';
-import filterIdsByNotStored from '../utils/filter-ids-by-not-stored';
+import { fetchPostsById } from '../utils/fetch';
 
 const { withSelect } = wp.data;
 
 export default withSelect( ( select, ownProps ) => {
-	const { getEntityRecords, getEntityRecord } = select( 'core' );
-	const { postIds, postType } = ownProps;
+	const { getPosts } = select( 'hm-post-select' );
+	const { postIds } = ownProps;
+	const posts = getPosts( postIds );
 
-	// If all posts already in store, use getEntityRecord for performance.
-	if ( filterIdsByNotStored( postIds, postType ).length === 0 ) {
+	if ( posts.length !== postIds.length ) {
+		fetchPostsById( postIds );
 		return {
-			posts: postIds.map( id => getEntityRecord( 'postType', postType, id ) ),
-			isLoading: false,
+			posts: [],
+			isLoading: true,
 		}
 	}
 
-	const posts = getEntityRecords( 'postType', postType, { include: postIds } );
-
 	return {
-		posts: posts || [],
-		isLoading: ! posts,
+		posts,
+		isLoading: false,
 	}
 } )( CurrentSelection );

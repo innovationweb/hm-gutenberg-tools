@@ -32,7 +32,7 @@ class PostSelectButton extends React.Component {
 				ReactDOM.createPortal(
 					<PostSelectModal
 						value={ value }
-						{ ...this.props.postSelectProps }
+						{ ...this.props }
 						onSelect={ posts => {
 							onSelect( posts );
 							onClose();

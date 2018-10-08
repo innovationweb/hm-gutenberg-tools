@@ -17,7 +17,7 @@ function enqueue_block_editor_assets() {
 	wp_enqueue_script(
 		'hm-gb-tools-editor',
 		HM_GB_TOOLS_URL . '/build/editor.bundle.js',
-		[ 'wp-blocks', 'wp-element' ],
+		[ 'wp-blocks', 'wp-element', 'wp-data' ],
 		filemtime( HM_GB_TOOLS_DIR . '/build/editor.bundle.js' ),
 		false
 	);

@@ -69,7 +69,7 @@ class Multi_Post_Type_Endpoint_Controller extends WP_REST_Controller {
 	 * @return true|WP_Error True if the request has search access, WP_Error object otherwise.
 	 */
 	public function get_items_permission_check( $request ) {
-		return current_user_can( 'contributor' );
+		return current_user_can( 'edit_posts' );
 	}
 
 	/**
@@ -199,7 +199,7 @@ class Multi_Post_Type_Endpoint_Controller extends WP_REST_Controller {
 		$allowed_types = $this->get_allowed_post_types();
 
 		$query_params[ self::PROP_TYPE ] = [
-			'description' => __( 'Limit results to items of an object type.', 'gutenberg' ),
+			'description' => __( 'Limit results to items of an object type.', 'hm-gb-tools' ),
 			'type'        => 'array',
 			'items'       => [
 				'type' => 'string',
@@ -212,12 +212,12 @@ class Multi_Post_Type_Endpoint_Controller extends WP_REST_Controller {
 		];
 
 		$query_params[ self::PROP_SEARCH ] = [
-			'description' => __( 'Limit results to items that match search query.', 'gutenberg' ),
+			'description' => __( 'Limit results to items that match search query.', 'hm-gb-tools' ),
 			'type'        => 'string',
 		];
 
 		$query_params[ self::PROP_INCLUDE ] = [
-			'description' => __( 'Include posts by ID.', 'gutenberg' ),
+			'description' => __( 'Include posts by ID.', 'hm-gb-tools' ),
 			'type'        => 'array',
 			'validate_callback' => function( $ids ) {
 				return count( $ids ) > 0;
@@ -228,7 +228,7 @@ class Multi_Post_Type_Endpoint_Controller extends WP_REST_Controller {
 		];
 
 		$query_params[ self::PROP_PER_PAGE ] = [
-			'description' => __( 'Number of results to return.', 'gutenberg' ),
+			'description' => __( 'Number of results to return.', 'hm-gb-tools' ),
 			'type'        => 'number',
 			'sanitize_callback' => function( $val ) {
 				return min( absint( $val ), 100 );
@@ -237,7 +237,7 @@ class Multi_Post_Type_Endpoint_Controller extends WP_REST_Controller {
 		];
 
 		$query_params[ self::PROP_PAGE ] = [
-			'description' => __( 'Page of results to return.', 'gutenberg' ),
+			'description' => __( 'Page of results to return.', 'hm-gb-tools' ),
 			'type'        => 'number',
 			'sanitize_callback' => function( $val ) {
 				return absint( $val );

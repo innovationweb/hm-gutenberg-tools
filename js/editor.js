@@ -1,8 +1,12 @@
+import wp from 'wp';
 import PostSelectButton from './post-select';
 import EditableHTML from './editable-html';
 import ImageControl from './controls/image';
 import PostControl from './controls/post';
 import LinkControl from './controls/link';
+import { reducer, actions, selectors } from './store';
+
+const { registerStore } = wp.data;
 
 window.hm = {
 	// Sidebar controls.
@@ -18,3 +22,8 @@ window.hm = {
 	},
 };
 
+registerStore( 'hm-post-select', {
+	reducer,
+	actions,
+	selectors,
+} );

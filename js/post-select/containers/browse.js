@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import Browse from '../components/browse';
 import config from '../../config';
-import { fetchJson } from '../../utils/fetch';
+import { fetchPosts } from '../../utils/fetch';
 
 const { addQueryArgs } = wp.url;
 
@@ -55,7 +55,7 @@ class PostSelectBrowse extends React.Component {
 
 		this.setState( { isLoading: true } );
 
-		fetchJson( {
+		fetchPosts( {
 			path: addQueryArgs( config.endpoint, query ),
 			signal: this.fetchPostAbortController.signal || null,
 		} ).then( ( [ posts, headers ] ) => this.setState( {
